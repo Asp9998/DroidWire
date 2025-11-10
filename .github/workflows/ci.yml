@@ -1,0 +1,64 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v2
+
+      - name: Setup Gradle cache
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x gradlew
+
+      # Lint/Detekt/Spotless are optional; don't fail if they aren't configured.
+      - name: Run Android Lint (non-fatal)
+        run: ./gradlew --no-daemon lintVitalRelease || true
+
+      - name: Run Detekt/Spotless if present (non-fatal)
+        run: |
+          ./gradlew --no-daemon detektAll || true
+          ./gradlew --no-daemon spotlessCheck || true
+
+      - name: Unit tests
+        run: ./gradlew --no-daemon testDebugUnitTest
+
+      - name: UI tests on emulator (API 34)
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          script: ./gradlew connectedDebugAndroidTest
+
+      - name: Build Debug APK & Release AAB
+        run: |
+          ./gradlew --no-daemon assembleDebug
+          ./gradlew --no-daemon bundleRelease
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            app/build/outputs/apk/debug/*.apk
+            app/build/outputs/bundle/release/*.aab
