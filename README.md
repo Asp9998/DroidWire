@@ -117,4 +117,12 @@ NewsFirebaseService receives push
                 │
                 ▼
          User opens DetailScreen(id)
-         
+
+```
+![WhatsApp Image 2025-11-14 at 10 21 13](https://github.com/user-attachments/assets/1a52754c-ddd9-42ab-88bd-29d8e024962c)
+
+
+![WhatsApp Image 2025-11-14 at 10 21 14](https://github.com/user-attachments/assets/b40e8527-7293-41b6-acbb-156d659c0b3e)
+
+![WhatsApp Image 2025-11-14 at 10 21 13 (1)](https://github.com/user-attachments/assets/18bb286a-02b0-41fd-845b-0e61d8d4d64c)
+
