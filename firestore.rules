@@ -1,0 +1,23 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isOwner(userId) {
+      return request.auth != null && request.auth.uid == userId;
+    }
+
+    // User doc
+    match /users/{userId} {
+      // Read/write the user's own profile doc
+      allow read, write: if isOwner(userId);
+
+      // Subcollections under the user
+      match /{colName}/{docId} {
+        allow read, create, update, delete:
+          if isOwner(userId) &&
+             (colName == 'drafts' || colName == 'transactions' || colName == 'savings'
+             || colName == 'current' || colName == 'account_summary');
+      }
+    }
+  }
+}
