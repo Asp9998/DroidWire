@@ -1,8 +1,13 @@
 ```text
 📱 Android News — Real-Time Android Updates with Push Notifications
-Android News is a real-time Android developer news app that delivers the latest updates from trusted sources such as Android Developers Blog, NewsAPI.
-The app features FCM push notifications, Firebase Cloud Functions, topic-based alerts, offline caching with Room, and a clean MVVM + Clean Architecture structure.
-This project is purpose-built to showcase mastery in push notifications, modern Android APIs, and full end-to-end backend integration.
+      Android News is a real-time Android developer news app that delivers the
+  latest updates from trusted sources such as Android Developers Blog, NewsAPI.
+
+      The app features FCM push notifications, Firebase Cloud Functions,
+  topic-based alerts, offline caching with Room, and a clean MVVM + Clean Architecture structure.
+
+      This project is purpose-built to showcase mastery in push notifications,
+  modern Android APIs, and full end-to-end backend integration.
 
 🚀 Features
   📰 News
