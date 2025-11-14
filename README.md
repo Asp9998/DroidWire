@@ -1,5 +1,5 @@
 ```text
-📱 Android News — Real-Time Android Updates with Push Notifications
+📱  DroidWire — Real-Time Android Updates with Push Notifications
       Android News is a real-time Android developer news app that delivers the
   latest updates from trusted sources such as Android Developers Blog, NewsAPI.
 
